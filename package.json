@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npx ts-node-dev --respawn --transpile-only --debug ./src/presentation/init.ts",
     "build": "tsc",
-    "start": "node dist/infrastructure/http/server.js",
+    "start": "node dist/presentation/http/server.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
