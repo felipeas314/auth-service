@@ -7,6 +7,7 @@ export class LoginUserController {
     public async handle(req: Request, res: Response) {
         try {
             const { email, password } = req.body;
+            console.log('ok')
             const result = await this.loginUserUseCase.execute({email, password});
             return res.status(200).json(result);
         } catch(error: any) {
