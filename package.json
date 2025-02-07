@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx ts-node-dev --respawn --transpile-only --debug ./src/interfaces/init.ts",
+    "dev": "npx ts-node-dev --respawn --transpile-only --debug ./src/presentation/init.ts",
     "build": "tsc",
     "start": "node dist/infrastructure/http/server.js",
     "test": "jest",
