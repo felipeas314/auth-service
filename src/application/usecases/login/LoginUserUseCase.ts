@@ -24,5 +24,7 @@ export class LoginUserUseCase implements ILoginUserUseCase {
     }
 
     const token = generateJwtToken({userId: user.id, email: user.email})
+
+    return { token };
   }
 }
