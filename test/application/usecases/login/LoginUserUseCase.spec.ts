@@ -12,9 +12,11 @@ describe("LoginUserUseCase", () => {
   beforeEach(() => {
     userRepository = {
       findByEmail: jest.fn(),
+      save: jest.fn(),
     };
 
     encrypterService = {
+      hash: jest.fn(),
       compare: jest.fn(),
     };
 
@@ -23,7 +25,7 @@ describe("LoginUserUseCase", () => {
 
   it("Deve retornar um token ao login com credenciais válidas", async () => {
     // Arrange
-    const mockUser = new User("1", "valid@teste.com", "hashedPassword");
+    const mockUser = new User("1", "valid@teste.com", "hashedPassword", "John JOhn");
     (userRepository.findByEmail as jest.Mock).mockResolvedValue(mockUser);
     (encrypterService.compare as jest.Mock).mockResolvedValue(true);
 
@@ -51,7 +53,7 @@ describe("LoginUserUseCase", () => {
 
   it("Deve lançar erro se a senha estiver incorreta", async () => {
     // Arrange
-    const mockUser = new User("1", "valid@teste.com", "hashedPassword");
+    const mockUser = new User("1", "valid@teste.com", "hashedPassword", "John Johm");
     (userRepository.findByEmail as jest.Mock).mockResolvedValue(mockUser);
     (encrypterService.compare as jest.Mock).mockResolvedValue(false);
 
