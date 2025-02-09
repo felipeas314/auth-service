@@ -4,10 +4,13 @@ import { CreateUserController } from "../../application/controller/CreateUserCon
 import { CreateUserUseCase } from "../../application/usecases/user/CreateUserUseCase";
 import { InMemoryUserRepository } from "../../infrastructure/database/InMemoryUserRepository";
 import { BcryptEncrypterService } from "../../infrastructure/service/BcryptEncrypterService";
+import { PostgresUserRepository } from "../../infrastructure/database/PostgresUserRepository";
 
 const userRoutes = Router();
 
-const userRepository = new InMemoryUserRepository();
+const usePostgres = process.env.USE_POSTGRES === "true";
+
+const userRepository = usePostgres ? new PostgresUserRepository() : new InMemoryUserRepository();
 const encrypterService = new BcryptEncrypterService();
 const createUserUseCase = new CreateUserUseCase(userRepository, encrypterService);
 const createUserController = new CreateUserController(createUserUseCase);
